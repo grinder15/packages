@@ -155,11 +155,11 @@ class _PageTransitionIndexedStackState extends State<PageTransitionIndexedStack>
       if (exit) {
         // play exit animation
         _childEntry.secondaryController.value = 0.0;
-        _childEntry.primaryController.forward(from: 0.0);
+        _childEntry.primaryController.reverse(from: 1.0);
       } else {
         // play enter animation
         _childEntry.primaryController.value = 1.0;
-        _childEntry.secondaryController.forward(from: 0.0);
+        _childEntry.secondaryController.reverse(from: 1.0);
       }
     } else {
       if (exit) {
