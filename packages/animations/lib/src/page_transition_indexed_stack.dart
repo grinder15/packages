@@ -154,11 +154,19 @@ class _PageTransitionIndexedStackState extends State<PageTransitionIndexedStack>
     if (exit) {
       // play exit animation
       _childEntry.primaryController.value = 1.0;
-      _childEntry.secondaryController.forward(from: 0.0);
+      if (reverse) {
+        _childEntry.secondaryController.reverse(from: 1.0);
+      } else {
+        _childEntry.secondaryController.forward(from: 0.0);
+      }
     } else {
       // play enter animation
       _childEntry.secondaryController.value = 0.0;
-      _childEntry.primaryController.forward(from: 0.0);
+      if (reverse) {
+        _childEntry.primaryController.reverse(from: 1.0);
+      } else {
+        _childEntry.primaryController.forward(from: 0.0);
+      }
     }
   }
 
@@ -186,7 +194,7 @@ class _PageTransitionIndexedStackState extends State<PageTransitionIndexedStack>
       // play animation
       if (widget.index != null) {
         _activeIndexes.add(widget.index);
-        _animateChild(_children[widget.index]);
+        _animateChild(_children[widget.index], reverse: widget.reverse);
       }
       // Note: we don't need to setState here cuz we will not perform exit animation
       // for the previous active index. save build cost.
@@ -209,11 +217,12 @@ class _PageTransitionIndexedStackState extends State<PageTransitionIndexedStack>
           _addIndexToSet(widget.index);
         }
         _activeIndexes.add(widget.index);
-        _animateChild(_children[widget.index]);
+        _animateChild(_children[widget.index], reverse: widget.reverse);
       }
       if (oldWidget.index != null) {
         _activeIndexes.add(widget.index);
-        _animateChild(_children[oldWidget.index], exit: true);
+        _animateChild(_children[oldWidget.index],
+            exit: true, reverse: widget.reverse);
       }
     }
   }
