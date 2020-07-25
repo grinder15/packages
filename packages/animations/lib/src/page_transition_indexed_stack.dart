@@ -151,20 +151,24 @@ class _PageTransitionIndexedStackState extends State<PageTransitionIndexedStack>
   void _animateChild(_ChildEntry _childEntry,
       {bool exit = false, bool reverse = false}) {
     // animate the child
-    if (exit) {
-      // play exit animation
-      _childEntry.primaryController.value = 1.0;
-      if (reverse) {
-        _childEntry.secondaryController.reverse(from: 1.0);
+    if (reverse) {
+      if (exit) {
+        // play exit animation
+        _childEntry.secondaryController.value = 0.0;
+        _childEntry.primaryController.forward(from: 0.0);
       } else {
+        // play enter animation
+        _childEntry.primaryController.value = 1.0;
         _childEntry.secondaryController.forward(from: 0.0);
       }
     } else {
-      // play enter animation
-      _childEntry.secondaryController.value = 0.0;
-      if (reverse) {
-        _childEntry.primaryController.reverse(from: 1.0);
+      if (exit) {
+        // play exit animation
+        _childEntry.primaryController.value = 1.0;
+        _childEntry.secondaryController.forward(from: 0.0);
       } else {
+        // play enter animation
+        _childEntry.secondaryController.value = 0.0;
         _childEntry.primaryController.forward(from: 0.0);
       }
     }
