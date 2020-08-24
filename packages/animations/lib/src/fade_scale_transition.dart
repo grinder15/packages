@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 // branch contains DualTransitionBuilder.
 import 'dual_transition_builder.dart' as dual_transition_builder;
 import 'modal.dart';
-import 'utils/curves.dart';
 
 /// The modal transition configuration for a Material fade transition.
 ///
